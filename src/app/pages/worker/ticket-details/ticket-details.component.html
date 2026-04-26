@@ -1,0 +1,135 @@
+<div class="ticket-view-container">
+  <header class="ticket-header">
+    <div class="header-left">
+      <button class="back-btn" (click)="onBack()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 12H5M12 19l-7-7 7-7" />
+        </svg>
+      </button>
+      <div class="ticket-title-info">
+        <h1>{{ ticket?.title }}</h1>
+        <span class="ticket-id">Ticket #{{ ticket?.id }}</span>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="btn-download">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        Download Ticket List
+      </button>
+
+      <button class="btn btn-fill-green" (click)="onComplete()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+        Complete Task
+      </button>
+    </div>
+  </header>
+
+  <div class="ticket-body">
+    <div class="main-content">
+      <div class="content-card info-card">
+        <div class="badges-row">
+          <span class="pill fill-blue">In Progress</span>
+          <span class="pill outline-red">Priority: High</span>
+        </div>
+
+        <section class="description-section">
+          <h3>Description</h3>
+          <p>{{ ticket?.description }}</p>
+        </section>
+
+        <div class="meta-grid">
+          <div class="meta-item">
+            <span class="label">Assigned To</span>
+            <div class="user-info">
+              <div class="avatar blue">AS</div>
+              <span class="name">{{ ticket?.assignedTo }}</span>
+            </div>
+          </div>
+          <div class="meta-item">
+            <span class="label">Priority</span>
+            <span class="date">{{ ticket?.priority }}</span>
+          </div>
+          <div class="meta-item">
+            <span class="label">Start Date</span>
+            <span class="date">{{ ticket?.startDate }}</span>
+          </div>
+          <div class="meta-item">
+            <span class="label">End Date</span>
+            <span class="date">{{ ticket?.endDate }}</span>
+          </div>
+          <div class="meta-item">
+            <span class="label">Work Status</span>
+            <select class="status-select" [(ngModel)]="ticket.status">
+              <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="content-card message-card">
+        <h3>Update Progress</h3>
+        <div class="message-input-area">
+          <textarea placeholder="Update your progress or leave a note..."></textarea>
+          <button class="send-btn">Update</button>
+        </div>
+      </div>
+
+      <div class="content-card extension-card">
+        <h3>Request Extension</h3>
+        <div class="extension-form message-input-area">
+          <div class="form-row">
+            <div class="field-group">
+              <span class="label">Propose New Start Date</span>
+              <input type="date" class="status-select" [(ngModel)]="extensionRequest.newStartDate">
+            </div>
+            <div class="field-group">
+              <span class="label">Propose New End Date</span>
+              <input type="date" class="status-select" [(ngModel)]="extensionRequest.newEndDate">
+            </div>
+          </div>
+          <div class="field-group">
+            <span class="label">Reason for Extension</span>
+            <textarea placeholder="Describe why you need more time..." [(ngModel)]="extensionRequest.reason"></textarea>
+          </div>
+          <button class="send-btn btn-fill-blue" (click)="sendExtensionRequest()">Send Request</button>
+
+          <div class="success-message" *ngIf="isExtensionRequested">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            Request sent successfully!
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="sidebar">
+      <div class="content-card sidebar-card">
+        <h3>Activity Log</h3>
+        <div class="activity-timeline">
+          <!-- Activity logs same as User for now -->
+          <div class="activity-item">
+            <div class="activity-icon green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+            <div class="activity-details">
+              <span class="user-name">Arjun Sharma</span>
+              <span class="action">Started working on the ticket</span>
+              <span class="timestamp">25/2/2026 at 09:15 AM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="app-container">
+  <app-sidebar 
+    [isCollapsed]="isSidebarCollapsed" 
+    (sidebarToggle)="onSidebarToggle($event)">
+  </app-sidebar>
+  <div class="main-container" [class.collapsed]="isSidebarCollapsed">
+    <app-header 
+      [isSidebarCollapsed]="isSidebarCollapsed" 
+      (toggleSidebar)="onSidebarToggle(false)">
+    </app-header>
+    <div class="content-area">
+      <!-- <app-quick-links></app-quick-links> -->
+      <router-outlet></router-outlet>
+    </div>
+    <app-footer></app-footer>
+  </div>
+</div>

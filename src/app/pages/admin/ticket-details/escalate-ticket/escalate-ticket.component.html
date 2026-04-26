@@ -1,0 +1,25 @@
+<app-modal [isOpen]="isOpen" [title]="'Escalate: ' + (ticketName || '') + ' - ' + (ticketId || '')" (close)="onClose()">
+  <div class="escalate-task-content">
+    <div class="form-field">
+      <label for="reject-person">Select Recipient</label>
+      <div class="select-wrapper">
+        <select class="form-control" id="reject-person" [(ngModel)]="selectedPerson">
+          <option value="" selected>Select Assignee</option>
+          <option value="user1">Rajesh Kumar (Senior Maintenance)</option>
+          <option value="user2">Priya Sharma (Production Lead)</option>
+          <option value="user3">Amit Singh (Safety Officer)</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-field">
+      <label for="escalate-comment">Escalation Comment</label>
+      <textarea id="escalate-comment" [(ngModel)]="comment" placeholder="Provide reason for escalation..."
+        class="escalate-textarea" rows="4"></textarea>
+    </div>
+  </div>
+
+  <div footer class="modal-footer-btns">
+    <button class="btn btn-cancel" (click)="onClose()">Cancel</button>
+    <button class="btn btn-submit" [disabled]="!comment.trim()" (click)="onSubmit()">Confirm Escalation</button>
+  </div>
+</app-modal>

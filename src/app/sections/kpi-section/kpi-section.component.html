@@ -1,0 +1,143 @@
+<!-- <div class="kpi-container">
+
+  <div class="kpi-card">
+      Total Account
+  </div>
+
+  <div class="kpi-card">
+      Inactive Account
+  </div>
+
+  <div class="kpi-card">
+      Blacklisted Account
+  </div>
+
+  <div class="kpi-card">
+      AMC Expiring Soon
+  </div>
+
+  <div class="kpi-card">
+      Warranty Expiring Soon
+  </div>
+
+  <div class="kpi-card">
+      AMC Expired
+  </div>
+
+  <div class="kpi-card">
+      Warranty Expired
+  </div>
+
+</div> -->
+
+<!-- ===================================================================================== -->
+
+
+<!-- <div class="kpi-wrapper">
+
+
+  <button 
+    class="nav-btn left"
+    *ngIf="kpis.length > visibleCount"
+    (click)="prev()">
+    ◀
+  </button>
+
+  <div class="kpi-container">
+
+    <div 
+      class="kpi-card"
+      *ngFor="let kpi of visibleKpis">
+
+      {{kpi}}
+
+    </div>
+
+  </div>
+
+
+  <button 
+    class="nav-btn right"
+    *ngIf="kpis.length > visibleCount"
+    (click)="next()">
+    ▶
+  </button>
+
+</div> -->
+
+<!-- ========================================================================================= -->
+<!-- 
+<div class="kpi-wrapper">
+
+  <button class="nav-btn" (click)="prev()" *ngIf="kpis.length > visibleCount">
+    ◀
+  </button>
+
+  <div class="kpi-container">
+
+    <div 
+      class="kpi-card"
+      *ngFor="let kpi of visibleKpis"
+      [style.border-top-color]="kpi.color">
+
+      <div class="kpi-header">
+        {{kpi.title}}
+      </div>
+
+      <div class="kpi-value">
+        {{kpi.value}}
+      </div>
+
+      <div class="kpi-trend">
+
+        <span 
+          class="trend-up"
+          *ngIf="kpi.trend === 'up'">
+          ▲ {{kpi.change}}%
+        </span>
+
+        <span 
+          class="trend-down"
+          *ngIf="kpi.trend === 'down'">
+          ▼ {{kpi.change}}%
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <button class="nav-btn" (click)="next()" *ngIf="kpis.length > visibleCount">
+    ▶
+  </button>
+
+</div> -->
+
+<!-- ==================================================================================== -->
+
+
+<div class="kpi-wrapper">
+  <button class="nav-btn prev-btn" (click)="prev()" *ngIf="kpis.length > visibleCount" [disabled]="startIndex === 0">
+    &#8249;
+  </button>
+
+  <div class="kpi-container">
+    <div class="kpi-card" *ngFor="let kpi of visibleKpis" (click)="selectKpi(kpi)" [class.kpi-active]="selectedKpi === kpi.title">
+      <div class="kpi-top">
+        <!-- <span class="kpi-icon" [style.color]="kpi.color">{{ kpi.icon }}</span> -->
+        <img src={{kpi.icon}} class="kpi-icon" [style.color]="kpi.color">
+        <span class="kpi-badge" [class.badge-up]="kpi.trend === 'up'" [class.badge-down]="kpi.trend === 'down'">
+          <span>{{ kpi.trend === 'up' ? '▲' : '▼' }}</span>
+          {{ kpi.change }}%
+        </span>
+      </div>
+      <div class="kpi-value">{{ kpi.value }}</div>
+      <div class="kpi-label">{{ kpi.title }}</div>
+    </div>
+  </div>
+
+  <button class="nav-btn next-btn" (click)="next()" *ngIf="kpis.length > visibleCount" [disabled]="startIndex + visibleCount >= kpis.length">
+    &#8250;
+  </button>
+</div>

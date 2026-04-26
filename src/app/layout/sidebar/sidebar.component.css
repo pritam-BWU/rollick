@@ -1,0 +1,279 @@
+/*======================================================================================*/
+
+
+
+/* SIDEBAR MAIN */
+.sidebar{
+  width:260px;
+  height:100vh;
+/*  background:#1e272e;*/
+  background:white;
+  color:white;
+  transition:all 0.3s ease;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+/*  border-right: 1px solid #ddd;*/
+  box-shadow: -4px 0 20px rgba(0,0,0,0.2);
+  position: fixed;
+}
+
+/* COLLAPSED MODE */
+.sidebar.collapsed{
+  width:70px;
+}
+
+
+/* -------------------- */
+/* LOGO SECTION */
+/* -------------------- */
+
+.logo-section{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:15px;
+  border-bottom:1px solid rgba(255,255,255,0.1);
+  cursor: pointer;
+}
+
+.logo img{
+  width: 130px;
+  /* width:58px;
+  height:58px; */
+}
+
+.collapse-btn{
+  background: transparent;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.collapse-btn:hover{
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.app-name{
+  /*font-size:14px;
+  font-weight:600;
+  flex:1;*/
+  width: 153px;
+  height: 36px;
+  opacity: 1;
+  font-family: Inter, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
+  letter-spacing: 0px;
+  color: #0B539D;
+}
+
+
+/*.collapse-btn{
+  background:none;
+  border:none;
+  color:#0B539D;
+  font-size:18px;
+  cursor:pointer;
+}*/
+
+
+/* -------------------- */
+/* MENU LIST */
+/* -------------------- */
+
+.menu{
+  list-style:none;
+  padding:0;
+  margin:0;
+  overflow-y:auto;
+  flex:1;
+}
+
+/* PARENT MENU ITEM */
+
+.menu-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:12px 16px;
+  margin: 0 12px 8px 12px;
+  cursor:pointer;
+  transition:all 0.2s ease;
+  font-size:14px;
+  border-radius: 24px;
+  color: #475569;
+}
+
+.menu-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #475569;
+}
+
+.menu-name{
+  font-family: Inter, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  color: #475569;
+  flex: 1;
+}
+
+.chevron-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+}
+
+/* HOVER & ACTIVE EFFECTS */
+.menu-item:hover{
+  background: #f8fafc;
+}
+
+.active-menu, .active-menu .menu-name, .active-menu .menu-icon {
+  background: #22bcd4 !important;
+  color: #ffffff !important;
+}
+
+.active-menu:hover {
+  background: #1d4ed8 !important;
+}
+
+
+/* -------------------- */
+/* SUBMENU */
+/* -------------------- */
+
+.submenu{
+  list-style:none;
+  padding-left:44px;
+  margin:0 12px 10px 12px;
+  color: #64748b;
+  animation:slideDown 0.2s ease;
+}
+
+.submenu li{
+  padding:10px 0;
+  font-size: 14px;
+  cursor:pointer;
+  color: #475569;
+  transition:0.2s;
+  font-weight: 400;
+}
+
+/* SUBMENU HOVER */
+
+.submenu li:hover{
+  color:#0B539D;
+}
+
+
+/* ACTIVE ROUTE */
+
+.submenu li.active{
+  color: #475569;
+  font-weight:500;
+}
+
+
+/* -------------------- */
+/* COLLAPSED MENU STYLE */
+/* -------------------- */
+
+.sidebar.collapsed .menu-item span:not(.icon){
+  display:none;
+}
+
+.sidebar.collapsed .submenu{
+  display:none;
+}
+
+
+/* -------------------- */
+/* SCROLLBAR */
+/* -------------------- */
+
+.menu::-webkit-scrollbar{
+  width:5px;
+}
+
+.menu::-webkit-scrollbar-thumb{
+  background:#485460;
+  border-radius:10px;
+}
+
+
+/* -------------------- */
+/* ANIMATION */
+/* -------------------- */
+
+@keyframes slideDown{
+  from{ opacity:0; transform:translateY(-5px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+
+/* -------------------- */
+/* USER PROFILE BOTTOM */
+/* -------------------- */
+.sidebar {
+  justify-content: space-between;
+}
+
+.user-profile-section {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  margin-top: auto;
+  border-top: 1px solid #f1f5f9;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.avatar-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #22bcd4;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.user-info h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+  color: #1e293b;
+}
+
+.user-info span {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.profile-dropdown {
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

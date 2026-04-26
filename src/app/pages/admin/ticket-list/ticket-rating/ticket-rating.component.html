@@ -1,0 +1,39 @@
+<app-modal [isOpen]="isOpen" [title]="'Close Ticket: ' + ticketId" (close)="onClose()">
+  <div class="rating-content">
+    <div class="ticket-info-summary">
+      <h4>{{ ticketName }}</h4>
+      <p>Please provide your feedback and rate the resolution of this ticket.</p>
+    </div>
+
+    <div class="rating-section">
+      <label>How would you rate the resolution?</label>
+      <div class="stars-container">
+        <button *ngFor="let star of stars" type="button" class="star-btn" [class.active]="star <= rating"
+          (click)="setRating(star)">
+          <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2">
+            <polygon
+              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+          </svg>
+        </button>
+      </div>
+      <span class="rating-label" *ngIf="rating > 0">
+        {{ rating === 5 ? 'Excellent' : rating === 4 ? 'Very Good' : rating === 3 ? 'Good' : rating === 2 ? 'Fair' :
+        'Poor' }}
+      </span>
+    </div>
+
+    <div class="form-field">
+      <label for="rating-comment">Comments (Optional)</label>
+      <textarea id="rating-comment" [(ngModel)]="comment"
+        placeholder="Tell us what we did well or what we could improve..." class="rating-textarea" rows="4"></textarea>
+    </div>
+  </div>
+
+  <div footer class="modal-footer-btns">
+    <button class="btn-skip" (click)="onSkip()">Skip</button>
+    <div class="footer-right">
+      <button class="btn-cancel" (click)="onClose()">Cancel</button>
+      <button class="btn-submit" [disabled]="rating === 0" (click)="onSubmit()">Submit & Close</button>
+    </div>
+  </div>
+</app-modal>

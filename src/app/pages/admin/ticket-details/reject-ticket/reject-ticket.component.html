@@ -1,0 +1,23 @@
+<app-modal [isOpen]="isOpen" [title]="'Reject: ' + (ticketName || '') + ' - ' + (ticketId || '')" (close)="onClose()">
+  <div class="reject-ticket-content">
+    <div class="form-field">
+      <label for="reject-reason">Rejection Reason</label>
+      <div class="select-wrapper">
+        <select class="form-control" id="reject-reason" [(ngModel)]="selectedReason">
+          <option value="" disabled selected>Select a reason...</option>
+          <option *ngFor="let reason of reasons" [value]="reason">{{ reason }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-field">
+      <label for="reject-note">Additional Notes</label>
+      <textarea id="reject-note" [(ngModel)]="note" placeholder="Provide detailed reason for rejection..."
+        class="reject-textarea" rows="4"></textarea>
+    </div>
+  </div>
+
+  <div footer class="modal-footer-btns">
+    <button class="btn btn-cancel" (click)="onClose()">Cancel</button>
+    <button class="btn btn-submit" [disabled]="!selectedReason || !note.trim()" (click)="onSubmit()">Confirm Rejection</button>
+  </div>
+</app-modal>

@@ -1,0 +1,359 @@
+<div class="container-wrapper">
+  <div class="pagehead">
+    <h2>Dashboard</h2>
+    <div class="createticketbtn">
+      <button class="btn-download">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        Download Ticket List
+      </button>
+    </div>
+  </div>
+
+  <!-- 5 Stats Cards Row -->
+  <div class="stats-grid">
+
+    <div class="dashboard-card" *ngFor="let stat of stats">
+      <div class="card-header">
+        <div class="icon-wrapper" [ngClass]="stat.iconClass" [ngSwitch]="stat.iconType">
+
+          <svg *ngSwitchCase="'lightning'" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polyline>
+          </svg>
+
+          <svg *ngSwitchCase="'trend-up'" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+          </svg>
+
+          <svg *ngSwitchCase="'monitor'" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+            <line x1="8" y1="21" x2="16" y2="21"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+          </svg>
+
+          <svg *ngSwitchCase="'clipboard'" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+            <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+            <path d="M12 11h4"></path>
+            <path d="M12 16h4"></path>
+            <path d="M8 11h.01"></path>
+            <path d="M8 16h.01"></path>
+          </svg>
+
+          <svg *ngSwitchCase="'chart'" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="20" x2="18" y2="10"></line>
+            <line x1="12" y1="20" x2="12" y2="4"></line>
+            <line x1="6" y1="20" x2="6" y2="14"></line>
+          </svg>
+
+        </div>
+        <div class="trend-icon" [ngClass]="stat.trendPositive ? 'text-green' : 'text-red'">
+          <svg *ngIf="stat.trendPositive" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+            <polyline points="16 7 22 7 22 13"></polyline>
+          </svg>
+          <svg *ngIf="!stat.trendPositive" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 17 13.5 8.5 8.5 13.5 2 7"></polyline>
+            <polyline points="16 17 22 17 22 11"></polyline>
+          </svg>
+          <span>{{stat.trend}}</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <h2>{{stat.value}}</h2>
+        <p>{{stat.title}}</p>
+      </div>
+    </div>
+
+  </div><!-- /stats-grid -->
+
+
+  <!-- INJECTED TICKET LIST -->
+  <div class="filter-card filternewflex">
+    <div class="search-bar">
+      <svg class="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="text" placeholder="Search tickets by name, description, or Id...">
+    </div>
+
+    <div class="filters-grid">
+      <div class="filter-group-main">
+        <div class="filter-dropdown">
+          <select>
+            <option>All Status</option>
+          </select>
+        </div>
+        <!-- <div class="filter-dropdown">
+          <select>
+            <option>All Priority</option>
+          </select>
+        </div> -->
+        <!-- <div class="filter-dropdown has-icon">
+          <select>
+            <option>All Dates</option>
+          </select>
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+        </div> -->
+        <!-- <div class="filter-dropdown has-icon">
+          <select>
+            <option>By Id</option>
+          </select>
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </div> -->
+        <div class="filter-group-secondary">
+
+          <div class="filter-dropdown has-icon">
+            <select>
+              <option>By Category</option>
+            </select>
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+          <!-- <div class="filter-dropdown has-icon">
+          <select>
+            <option>Assign To</option>
+          </select>
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </div> -->
+          <div class="filter-dropdown-container">
+            <button class="filter-icon-btn" (click)="toggleFilterDropdown()" [class.active]="isFilterDropdownOpen">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </svg>
+            </button>
+
+            <!-- Filter Dropdown Menu -->
+            <div class="filter-menu-card" *ngIf="isFilterDropdownOpen">
+              <div class="filter-options">
+                <label class="filter-item">
+                  <div class="checkbox-wrapper">
+                    <input type="checkbox" [(ngModel)]="selectedFilters.date">
+                  </div>
+                  <span>By Date</span>
+                </label>
+                <label class="filter-item">
+                  <div class="checkbox-wrapper">
+                    <input type="checkbox" [(ngModel)]="selectedFilters.id">
+                  </div>
+                  <span>By Id</span>
+                </label>
+              </div>
+              <div class="filter-actions">
+                <button class="btn-filter-search" (click)="applyFilters()">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  </svg>
+                  Search
+                </button>
+              </div>
+            </div>
+          </div>
+
+
+          <div class=" create-btn-wrapper">
+            <button class="create-btn" (click)="openCreateTicketDrawer()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              Create New Ticket
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+  <div class="table-card">
+    <div class="table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Ticket Id</th>
+            <th>Ticket Name</th>
+            <th>Description</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Due Ticket</th>
+            <th>Days</th>
+            <th>Status</th>
+            <th>Category</th>
+            <th>View</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>TKT-2024-001</td>
+            <td>Equipment Inspection - Line A</td>
+            <td class="truncate" title="Complete monthly safety inspection">Complete monthly safety insp...</td>
+            <td>25/02/2026</td>
+            <td>27/02/2026</td>
+            <td><span class="pill outline-red">Overdue</span></td>
+            <td class="fw-bold">26</td>
+            <td><span class="pill fill-blue">Assigned</span></td>
+            <td>Safety Inspection</td>
+            <td><a [routerLink]="['/worker/ticket', 'TKT-2024-001']" class="view-icon"><svg viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg></a></td>
+            <td><a href="javascript:void(0)" class="action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2">
+                  <circle cx="12" cy="12" r="1"></circle>
+                  <circle cx="12" cy="5" r="1"></circle>
+                  <circle cx="12" cy="19" r="1"></circle>
+                </svg></a></td>
+          </tr>
+          <tr>
+            <td>TKT-2024-002</td>
+            <td>Maintenance Report Review</td>
+            <td class="truncate" title="Review and approve maintenance">Review and approve mainten...</td>
+            <td>26/02/2026</td>
+            <td>10/02/2026</td>
+            <td><span class="pill outline-red">Overdue</span></td>
+            <td class="fw-bold">43</td>
+            <td><span class="pill fill-blue">Assigned</span></td>
+            <td>Maintenance</td>
+            <td><a [routerLink]="['/worker/ticket', 'TKT-2024-002']" class="view-icon"><svg viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg></a></td>
+            <td><a href="javascript:void(0)" class="action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2">
+                  <circle cx="12" cy="12" r="1"></circle>
+                  <circle cx="12" cy="5" r="1"></circle>
+                  <circle cx="12" cy="19" r="1"></circle>
+                </svg></a></td>
+          </tr>
+          <tr>
+            <td>TKT-2024-003</td>
+            <td>Update Equipment Records</td>
+            <td class="truncate" title="Update equipment database">Update equipment database ...</td>
+            <td>27/02/2026</td>
+            <td>02/03/2026</td>
+            <td><span class="pill outline-red">Overdue</span></td>
+            <td class="fw-bold">23</td>
+            <td><span class="pill outline-gray">Draft</span></td>
+            <td>Documentation</td>
+            <td><a [routerLink]="['/worker/ticket', 'TKT-2024-003']" class="view-icon"><svg viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg></a></td>
+            <td><a href="javascript:void(0)" class="action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2">
+                  <circle cx="12" cy="12" r="1"></circle>
+                  <circle cx="12" cy="5" r="1"></circle>
+                  <circle cx="12" cy="19" r="1"></circle>
+                </svg></a></td>
+          </tr>
+          <tr>
+            <td>TKT-2024-004</td>
+            <td>Safety Training Documentation</td>
+            <td class="truncate" title="Complete documentation for">Complete documentation for ...</td>
+            <td>01/03/2026</td>
+            <td>15/02/2026</td>
+            <td><span class="pill outline-red">Overdue</span></td>
+            <td class="fw-bold">38</td>
+            <td><span class="pill outline-green">Close</span></td>
+            <td>Training</td>
+            <td><a [routerLink]="['/worker/ticket', 'TKT-2024-004']" class="view-icon"><svg viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg></a></td>
+            <td><a href="javascript:void(0)" class="action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2">
+                  <circle cx="12" cy="12" r="1"></circle>
+                  <circle cx="12" cy="5" r="1"></circle>
+                  <circle cx="12" cy="19" r="1"></circle>
+                </svg></a></td>
+          </tr>
+          <tr>
+            <td>TKT-2024-005</td>
+            <td>Production Line Optimization</td>
+            <td class="truncate" title="Analyze and implement efficiency">Analyze and implement effici...</td>
+            <td>05/03/2026</td>
+            <td>26/02/2026</td>
+            <td><span class="pill outline-red">Overdue</span></td>
+            <td class="fw-bold">27</td>
+            <td><span class="pill fill-blue">Assigned</span></td>
+            <td>Production</td>
+            <td><a [routerLink]="['/worker/ticket', 'TKT-2024-005']" class="view-icon"><svg viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg></a></td>
+            <td><a href="javascript:void(0)" class="action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2">
+                  <circle cx="12" cy="12" r="1"></circle>
+                  <circle cx="12" cy="5" r="1"></circle>
+                  <circle cx="12" cy="19" r="1"></circle>
+                </svg></a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+      <div class="page-info">Showing <strong>1-5</strong> of <strong>5</strong> tickets</div>
+
+      <div class="page-controls">
+        <button class="control-btn disabled">&lt; Previous</button>
+        <button class="num-btn active">1</button>
+        <button class="num-btn">2</button>
+        <button class="num-btn">3</button>
+        <button class="control-btn">Next &gt;</button>
+      </div>
+
+      <div class="page-size">
+        Items per page:
+        <select>
+          <option>10</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <!-- END INJECTED TICKET LIST -->
+  <app-create-ticket-drawer [isOpen]="isCreateDrawerOpen"
+    (close)="closeCreateTicketDrawer()"></app-create-ticket-drawer>
+</div>

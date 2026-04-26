@@ -1,0 +1,173 @@
+<div class="ticket-view-container">
+  <header class="ticket-header">
+    <div class="header-left">
+      <button class="back-btn" (click)="onBack()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 12H5M12 19l-7-7 7-7" />
+        </svg>
+      </button>
+      <div class="ticket-title-info">
+        <h1>{{ ticket?.title }}</h1>
+        <span class="ticket-id">Ticket #{{ ticket?.id }}</span>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-approve">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+        Approve
+      </button>
+
+      <button class="btn btn-outline-blue" (click)="openAssignModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+          <circle cx="8.5" cy="7" r="4" />
+          <line x1="20" y1="8" x2="20" y2="14" />
+          <line x1="17" y1="11" x2="23" y2="11" />
+        </svg>
+        Assign
+      </button>
+      <button class="btn btn-fill-green" (click)="openRatingModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+        Close
+      </button>
+      <button class="btn btn-outline-red">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="3 6 5 6 21 6" />
+          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+        </svg>
+        Delete
+      </button>
+      <button class="btn btn-outline-yellow" (click)="openEscalateModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+          <polyline points="17 6 23 6 23 12"></polyline>
+        </svg>
+        Escalate
+      </button>
+      <button class="btn btn-outline-red" (click)="openRejectModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="15" y1="9" x2="9" y2="15"></line>
+          <line x1="9" y1="9" x2="15" y2="15"></line>
+        </svg>
+        Reject
+      </button>
+    </div>
+  </header>
+
+  <div class="ticket-body">
+    <div class="main-content">
+      <div class="content-card info-card">
+        <button class="btn-edit-corner" title="Edit Ticket" (click)="openCreateTicketDrawer()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+          </svg>
+        </button>
+
+        <div class="badges-row">
+          <span class="pill fill-blue">In Progress</span>
+          <span class="pill outline-red">Priority: High</span>
+        </div>
+
+        <section class="description-section">
+          <h3>Description</h3>
+          <p>{{ ticket?.description }}</p>
+        </section>
+
+        <div class="meta-grid">
+          <div class="meta-item">
+            <span class="label">Assigned To</span>
+            <div class="user-info">
+              <div class="avatar blue">AS</div>
+              <span class="name">{{ ticket?.assignedTo }}</span>
+            </div>
+          </div>
+          <div class="meta-item">
+            <span class="label">Created By</span>
+            <div class="user-info">
+              <span class="name">Rajesh Kumar</span>
+            </div>
+          </div>
+          <div class="meta-item">
+            <div class="team-info">
+              <div class="avatar group-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                </svg>
+              </div>
+              <span class="name">Maintenance Team</span>
+            </div>
+          </div>
+          <div class="meta-item"></div>
+          <div class="meta-item">
+            <span class="label">Start Date</span>
+            <span class="date">{{ ticket?.startDate }}</span>
+          </div>
+          <div class="meta-item">
+            <span class="label">End Date</span>
+            <span class="date">{{ ticket?.endDate }}</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="content-card message-card">
+        <h3>Admin Console</h3>
+        <div class="message-input-area">
+          <textarea placeholder="Administrative notes or comments..."></textarea>
+          <button class="send-btn">Post</button>
+        </div>
+      </div>
+    </div>
+
+    <aside class="sidebar">
+      <div class="content-card sidebar-card">
+        <h3>Activity Log</h3>
+        <div class="activity-timeline">
+          <!-- Activity logs -->
+          <div class="activity-item">
+            <div class="activity-icon green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+            <div class="activity-details">
+              <span class="user-name">Arjun Sharma</span>
+              <span class="action">Started working on the ticket</span>
+              <span class="timestamp">25/2/2026 at 09:15 AM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<app-add-assignee [isOpen]="isAssigneeModalOpen" (close)="isAssigneeModalOpen = false"
+  (assign)="onAssigneeAdded($event)"></app-add-assignee>
+
+<app-assign-ticket [isOpen]="isAssignModalOpen" (close)="isAssignModalOpen = false"
+  (assign)="onTicketAssigned($event)"></app-assign-ticket>
+
+<app-ticket-rating [isOpen]="isRatingModalOpen" [ticketId]="ticket?.id" [ticketName]="ticket?.title"
+  (close)="isRatingModalOpen = false" (submit)="handleRatingSubmit($event)">
+</app-ticket-rating>
+
+<app-escalate-ticket [isOpen]="isEscalateModalOpen" [ticketId]="ticket?.id" [ticketName]="ticket?.title"
+  (close)="isEscalateModalOpen = false" (submit)="handleEscalateSubmit($event)">
+</app-escalate-ticket>
+
+<app-reject-ticket [isOpen]="isRejectModalOpen" [ticketId]="ticket?.id" [ticketName]="ticket?.title"
+  (close)="isRejectModalOpen = false" (submit)="handleRejectSubmit($event)">
+</app-reject-ticket>
+
+<app-admin-create-ticket-drawer [isOpen]="isCreateDrawerOpen" (close)="closeCreateTicketDrawer()">
+</app-admin-create-ticket-drawer>

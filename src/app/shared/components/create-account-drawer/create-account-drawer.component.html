@@ -1,0 +1,135 @@
+<!-- 
+<div class="overlay" *ngIf="show" (click)="closePopup()"></div>  
+<div class="account-drawer" [class.open]="show">
+  <div class="drawer-header">
+    <h2>Create Account</h2>
+    <span class="close-btn" (click)="closePopup()">✕</span>
+  </div>
+  <div class="drawer-body">
+
+
+    <div class="section-header" (click)="toggleSection('basic')">
+      <h3>Basic Information</h3>
+      <span class="chevron" [class.open]="openSection === 'basic'">
+      	<img src="assets/images/form-collapse.png">
+      </span>
+    </div>
+    <div class="section-content" [class.expanded]="openSection === 'basic'">
+      <label>Account Name *</label>
+      <input type="text" placeholder="Enter account name">
+      <label>Account Type *</label>
+      <select>
+        <option>Select Type</option>
+      </select>
+      <label>Industry</label>
+      <select>
+        <option>Select Industry</option>
+      </select>
+    </div>
+
+
+    <div class="section-header" (click)="toggleSection('other')">
+      <h3>Other Information</h3>
+      <span class="chevron" [class.open]="openSection === 'other'">
+      	<img src="assets/images/form-collapse.png">
+      </span>
+    </div>
+    <div class="section-content" [class.expanded]="openSection === 'other'">
+      <label>GSTIN No *</label>
+      <input type="text" placeholder="Enter GSTIN">
+      <label>PAN No *</label>
+      <input type="text" placeholder="Enter PAN">
+      <label>Website</label>
+      <input type="text" placeholder="Enter website">
+      <div class="status-toggle">
+        <label>Status</label>
+        <div>
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </label>
+          <span class="status-text">Active</span>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="section-header" (click)="toggleSection('payment')">
+      <h3>Payment Information</h3>
+      <span class="chevron" [class.open]="openSection === 'payment'">
+      	<img src="assets/images/form-collapse.png">
+      </span>
+    </div>
+    <div class="section-content" [class.expanded]="openSection === 'payment'">
+      <label>Credit Limit *</label>
+      <input type="text" placeholder="Enter Limit">
+      <label>Payment Terms *</label>
+      <input type="text" placeholder="Enter terms">
+    </div>
+
+  </div>
+  <div class="footer-btn">
+		<button class="clear-all">Clear All</button>
+		<button class="save">Save</button>
+	</div>
+</div> -->
+
+
+<div class="overlay" *ngIf="show" (click)="closePopup()"></div>
+<div class="account-drawer" [class.open]="show">
+  <div class="drawer-header">
+    <h2>{{ config.title }}</h2>
+    <span class="close-btn" (click)="closePopup()">✕</span>
+  </div>
+
+  <div class="drawer-body">
+    <ng-container *ngFor="let section of config.sections">
+
+      <!-- Section Header -->
+      <div class="section-header" (click)="toggleSection(section.id)">
+        <h3>{{ section.title }}</h3>
+        <span class="chevron" [class.open]="openSection === section.id">^</span>
+      </div>
+
+      <!-- Section Fields -->
+      <div class="section-content" [class.expanded]="openSection === section.id">
+        <ng-container *ngFor="let field of section.fields">
+
+          <label>{{ field.label }} <span *ngIf="field.required">*</span></label>
+
+          <!-- Text / Email / Number -->
+          <input
+            *ngIf="field.type !== 'select' && field.type !== 'toggle'"
+            [type]="field.type"
+            [placeholder]="field.placeholder || ''"
+            [(ngModel)]="formData[field.key]"
+          >
+
+          <!-- Select -->
+          <select *ngIf="field.type === 'select'" [(ngModel)]="formData[field.key]">
+            <option value="">{{ field.placeholder || 'Select' }}</option>
+            <option *ngFor="let opt of field.options" [value]="opt.value">
+              {{ opt.label }}
+            </option>
+          </select>
+
+          <!-- Toggle -->
+          <div *ngIf="field.type === 'toggle'" class="status-toggle">
+            <label class="switch">
+              <input type="checkbox" [(ngModel)]="formData[field.key]">
+              <span class="slider"></span>
+            </label>
+            <span>{{ formData[field.key] ? 'Active' : 'Inactive' }}</span>
+          </div>
+
+        </ng-container>
+      </div>
+
+    </ng-container>
+  </div>
+
+  <div class="footer-btn">
+    <button class="clear-all" (click)="closePopup()">Clear All</button>
+    <button class="save" (click)="onSave()">Save</button>
+  </div>
+</div>

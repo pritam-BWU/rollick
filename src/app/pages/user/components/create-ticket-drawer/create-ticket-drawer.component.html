@@ -1,0 +1,98 @@
+<app-side-drawer [isOpen]="isOpen" title="Create New Ticket" (close)="onClose()">
+  <div class="ticket-form">
+    <!-- Basic Information Section -->
+    <div class="form-section">
+
+      <div class="form-field">
+        <label>Select Department <span class="required">*</span></label>
+        <div class="select-wrapper">
+          <select [(ngModel)]="ticketData.category">
+            <option value="" disabled selected>Select Department</option>
+            <option value="IT">IT</option>
+            <option value="maintenance">Maintenance</option>
+            <option value="Admin">Admin</option>
+            <option value="HR">HR</option>
+            <option value="Finance">Finance</option>
+            <option value="Sales">Sales</option>
+            <option value="Production">Production</option>
+            <option value="Quality Control">Quality Control</option>
+            <option value="Safety Inspection">Safety Inspection</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Management">Management</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Ticket Type <span class="required">*</span></label>
+        <div class="premium-radio-group">
+          <label class="premium-radio-card" [class.active]="ticketData.type === 'issue'">
+            <input type="radio" name="type" value="issue" [(ngModel)]="ticketData.type">
+            <div class="radio-content">
+              <div class="radio-check"></div>
+              <span class="radio-text">Issue</span>
+            </div>
+
+          </label>
+
+          <label class="premium-radio-card" [class.active]="ticketData.type === 'query'">
+            <input type="radio" name="type" value="query" [(ngModel)]="ticketData.type">
+            <div class="radio-content">
+              <div class="radio-check"></div>
+              <span class="radio-text">Query</span>
+            </div>
+          </label>
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Ticket Category <span class="required">*</span></label>
+        <div class="select-wrapper">
+          <select>
+            <option value="" selected>Select ticket Category</option>
+            <option value="">Salary</option>
+            <option value="">Leave</option>
+            <option value="">Advance</option>
+            <option value="">Holiday</option>
+            <option value="">Overtime</option>
+            <option value="">Shift</option>
+            <option value="">Attendance</option>
+            <option value="">Document</option>
+            <option value="">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>Ticket Description <span class="required">*</span></label>
+        <textarea [(ngModel)]="ticketData.description" placeholder="Enter ticket description" rows="4"></textarea>
+      </div>
+    </div>
+
+    <!-- File Upload Section -->
+    <div class="form-section">
+      <div class="form-field">
+        <label>Upload Attachment</label>
+        <div class="file-upload-wrapper">
+          <div class="file-info-header">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17 8 12 3 7 8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+            <span>Select a file to upload</span>
+          </div>
+          <input type="file" (change)="onFileSelected($event)" class="file-input">
+          <div class="file-status" *ngIf="selectedFile">
+            Selected: <strong>{{selectedFile.name}}</strong>
+          </div>
+          <p class="upload-hint">Max file size: 10MB (PDF, PNG, JPG, Excel, Word)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Actions -->
+  <div footer class="form-footer">
+    <!-- <button class="btn-outline" (click)="saveAsDraft()">Save as Draft</button> -->
+    <button class="btn-primary" (click)="submitTicket()">Submit</button>
+  </div>
+</app-side-drawer>

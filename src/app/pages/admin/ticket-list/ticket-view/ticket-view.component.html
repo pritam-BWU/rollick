@@ -1,0 +1,275 @@
+<div class="ticket-view-container">
+  <!-- Header -->
+  <header class="ticket-header">
+    <div class="header-left">
+      <button class="back-btn" (click)="onBack()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 12H5M12 19l-7-7 7-7" />
+        </svg>
+      </button>
+      <div class="ticket-title-info">
+        <h1>{{ ticket?.title || 'Equipment Inspection - Line A' }}</h1>
+        <span class="ticket-id">Ticket #{{ ticket?.id || 'TKT-2024-001' }}</span>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-outline-blue" (click)="openAssignModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+          <circle cx="8.5" cy="7" r="4" />
+          <line x1="20" y1="8" x2="20" y2="14" />
+          <line x1="17" y1="11" x2="23" y2="11" />
+        </svg>
+        Assign
+      </button>
+      <button class="btn btn-fill-green">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+        Close
+      </button>
+      <button class="btn btn-outline-red">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="3 6 5 6 21 6" />
+          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+        </svg>
+        Delete
+      </button>
+    </div>
+  </header>
+
+  <div class="ticket-body">
+    <!-- Main Content (Left Column) -->
+    <div class="main-content">
+      <div class="content-card info-card">
+        <div class="badges-row">
+          <span class="pill fill-blue">In Progress</span>
+          <span class="pill outline-red">Priority: High</span>
+        </div>
+
+        <section class="description-section">
+          <h3>Description</h3>
+          <p>Complete monthly safety inspection for production line A including hydraulic systems, electrical
+            components, and safety mechanisms.</p>
+        </section>
+
+        <div class="meta-grid">
+          <div class="meta-item">
+            <span class="label">Assigned To</span>
+            <div class="user-info">
+              <div class="avatar blue">AS</div>
+              <span class="name">Arjun Sharma</span>
+              <button class="dots-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="1" />
+                  <circle cx="12" cy="5" r="1" />
+                  <circle cx="12" cy="19" r="1" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="meta-item">
+            <span class="label">Created By</span>
+            <div class="user-info">
+              <span class="name">Rajesh Kumar</span>
+            </div>
+          </div>
+          <div class="meta-item">
+            <div class="team-info">
+              <div class="avatar-group">
+                <div class="avatar group-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                </div>
+              </div>
+              <span class="name">Maintenance Team</span>
+              <button class="dots-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="1" />
+                  <circle cx="12" cy="5" r="1" />
+                  <circle cx="12" cy="19" r="1" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="meta-item spacer"></div>
+          <div class="meta-item">
+            <span class="label">Start Date</span>
+            <span class="date">25/2/2026</span>
+          </div>
+          <div class="meta-item">
+            <span class="label">End Date</span>
+            <span class="date">28/2/2026</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Message Section (Positioned inside main-content for layout) -->
+      <div class="content-card message-card">
+        <h3>Send Message</h3>
+        <div class="message-input-area">
+          <textarea placeholder="Type your message here..."></textarea>
+          <button class="send-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+            </svg>
+            Send
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Activity Log (Right Sidebar) -->
+    <aside class="sidebar">
+      <div class="content-card sidebar-card">
+        <h3>Activity Log</h3>
+        <div class="activity-timeline">
+          <div class="activity-item">
+            <div class="activity-icon green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+            <div class="activity-details">
+              <span class="user-name">Arjun Sharma</span>
+              <span class="action">Started working on the ticket</span>
+              <span class="timestamp">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                  <line x1="16" y1="2" x2="16" y2="6" />
+                  <line x1="8" y1="2" x2="8" y2="6" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+                25/2/2026
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+                09:15 AM
+              </span>
+            </div>
+          </div>
+
+          <div class="activity-item">
+            <div class="activity-icon green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+            <div class="activity-details">
+              <span class="user-name">Arjun Sharma</span>
+              <span class="action">Updated progress to 30%</span>
+              <span class="timestamp">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                  <line x1="16" y1="2" x2="16" y2="6" />
+                  <line x1="8" y1="2" x2="8" y2="6" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+                25/2/2026
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+                11:45 AM
+              </span>
+            </div>
+          </div>
+
+          <div class="activity-item">
+            <div class="activity-icon blue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="16" x2="12" y2="12" />
+                <line x1="12" y1="8" x2="12.01" y2="8" />
+              </svg>
+            </div>
+            <div class="activity-details">
+              <span class="user-name">Rajesh Kumar</span>
+              <span class="action">Added comment: "Please prioritize the hydraulic system check"</span>
+              <span class="timestamp">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                  <line x1="16" y1="2" x2="16" y2="6" />
+                  <line x1="8" y1="2" x2="8" y2="6" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+                25/2/2026
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+                02:30 PM
+              </span>
+            </div>
+          </div>
+
+          <div class="activity-item">
+            <div class="activity-icon green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+            <div class="activity-details">
+              <span class="user-name">Arjun Sharma</span>
+              <span class="action">Updated progress to 65%</span>
+              <span class="timestamp">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                  <line x1="16" y1="2" x2="16" y2="6" />
+                  <line x1="8" y1="2" x2="8" y2="6" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+                25/2/2026
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+                04:20 PM
+              </span>
+            </div>
+          </div>
+
+          <div class="activity-item">
+            <div class="activity-icon yellow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="16" x2="12" y2="12" />
+                <line x1="12" y1="8" x2="12.01" y2="8" />
+              </svg>
+            </div>
+            <div class="activity-details">
+              <span class="user-name">Admin</span>
+              <span class="action">Changed priority from Mid to High</span>
+              <span class="timestamp">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                  <line x1="16" y1="2" x2="16" y2="6" />
+                  <line x1="8" y1="2" x2="8" y2="6" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+                25/2/2026
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+                05:10 PM
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<app-add-assignee [isOpen]="isAssigneeModalOpen" (close)="isAssigneeModalOpen = false"
+  (assign)="onAssigneeAdded($event)"></app-add-assignee>
+
+<app-assign-ticket [isOpen]="isAssignModalOpen" (close)="isAssignModalOpen = false"
+  (assign)="onTicketAssigned($event)"></app-assign-ticket>

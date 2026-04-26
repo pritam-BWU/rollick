@@ -1,0 +1,226 @@
+<div class="container-wrapper">
+  <div class="pagehead usertkthead">
+    <h2>Ticket History</h2>
+    <div class="tabs-header">
+      <button class="tab-btn" [class.active]="activeTab === 'my'" (click)="activeTab = 'my'">My History</button>
+      <button class="tab-btn" [class.active]="activeTab === 'assign'" (click)="activeTab = 'assign'">Assigned History</button>
+    </div>
+  </div>
+
+  <!-- KPI Stats Section -->
+  <div class="kpi-container">
+    <div class="kpi-card" *ngFor="let kpi of kpiData">
+      <div class="kpi-icon" [ngClass]="kpi.icon">
+        <svg *ngIf="kpi.icon === 'total'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+        </svg>
+        <svg *ngIf="kpi.icon === 'open'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <svg *ngIf="kpi.icon === 'progress'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+        </svg>
+        <svg *ngIf="kpi.icon === 'closed'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+      </div>
+      <div class="kpi-info">
+        <span class="label">{{kpi.label}}</span>
+        <h3 class="value">{{kpi.value}}</h3>
+        <span class="trend" [ngClass]="kpi.trendClass">{{kpi.trend}}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ticket-list-page">
+    <div class="filter-card filternewflex">
+      <div class="search-bar">
+        <svg class="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+        <input type="text" placeholder="Search history records...">
+      </div>
+
+      <div class="filters-grid">
+        <div class="filter-group-main">
+          <div class="filter-dropdown">
+            <select>
+              <option>All Status</option>
+              <option>Resolved</option>
+              <option>Closed</option>
+              <option>Auto Close</option>
+              <option>Rejected</option>
+            </select>
+          </div>
+          <div class="filter-group-secondary">
+            <div class="filter-dropdown has-icon">
+              <select>
+                <option>By Department</option>
+                <option>IT</option>
+                <option>HR</option>
+                <option>Finance</option>
+              </select>
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
+            
+            <div class="filter-dropdown-container">
+              <button class="filter-icon-btn" (click)="toggleFilterDropdown()" [class.active]="isFilterDropdownOpen">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="3" y1="12" x2="21" y2="12"></line>
+                  <line x1="3" y1="6" x2="21" y2="6"></line>
+                  <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+              </button>
+              
+              <div class="filter-menu-card" *ngIf="isFilterDropdownOpen" (click)="$event.stopPropagation()">
+                <div class="filter-options">
+                  <label class="filter-item">
+                    <div class="checkbox-wrapper">
+                      <input type="checkbox" [(ngModel)]="selectedFilters.date">
+                    </div>
+                    <span>By Date</span>
+                  </label>
+                  <label class="filter-item">
+                    <div class="checkbox-wrapper">
+                      <input type="checkbox" [(ngModel)]="selectedFilters.id">
+                    </div>
+                    <span>By Ticket ID</span>
+                  </label>
+                </div>
+                <div class="filter-actions">
+                  <button class="btn-filter-search" (click)="applyFilters()">Search</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-card newtblcard">
+      <div class="table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Ticket ID</th>
+              <th>Created On</th>
+              <th>Subject</th>
+              <th>Department</th>
+              <th>Category</th>
+              <th>Priority</th>
+              <th>Status</th>
+              <th>View</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="id-cell">TKT-2024-001</td>
+              <td>10/05/2024</td>
+              <td>Monthly Safety Audit</td>
+              <td>Safety</td>
+              <td>Audit</td>
+              <td><span class="pill outline-red">HIGH</span></td>
+              <td><span class="pill outline-green">Resolved</span></td>
+              <td><a [routerLink]="['/user/ticket', 'TKT-2024-001']" class="view-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a></td>
+              <td class="action-cell">
+                <div class="action-dropdown-container">
+                  <button class="action-icon-btn" (click)="toggleActionDropdown('TKT-2024-001', $event)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="19" r="1.5"/>
+                    </svg>
+                  </button>
+                  <div class="action-dropdown-menu" *ngIf="activeActionDropdown === 'TKT-2024-001'">
+                    <button class="dropdown-item review" (click)="openGenericModal('Review', 'TKT-2024-001')">Review</button>
+                    <button class="dropdown-item reopen" (click)="openGenericModal('Reopen', 'TKT-2024-001')">Reopen</button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="id-cell">TKT-2024-004</td>
+              <td>12/05/2024</td>
+              <td>Server Maintenance</td>
+              <td>IT</td>
+              <td>Support</td>
+              <td><span class="pill outline-orange">MEDIUM</span></td>
+              <td><span class="pill outline-gray">Closed</span></td>
+              <td><a [routerLink]="['/user/ticket', 'TKT-2024-004']" class="view-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a></td>
+              <td class="action-cell">
+                <div class="action-dropdown-container">
+                  <button class="action-icon-btn" (click)="toggleActionDropdown('TKT-2024-004', $event)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="19" r="1.5"/>
+                    </svg>
+                  </button>
+                  <div class="action-dropdown-menu" *ngIf="activeActionDropdown === 'TKT-2024-004'">
+                    <button class="dropdown-item review" (click)="openGenericModal('Review', 'TKT-2024-004')">Review</button>
+                    <button class="dropdown-item reopen" (click)="openGenericModal('Reopen', 'TKT-2024-004')">Reopen</button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+      <!-- Pagination (Matches Create Ticket) -->
+      <div class="pagination">
+        <div class="page-info">Showing <strong>1-2</strong> of <strong>289</strong> tickets</div>
+
+        <div class="page-controls">
+          <button class="control-btn disabled">&lt; Previous</button>
+          <button class="num-btn active">1</button>
+          <button class="num-btn">2</button>
+          <button class="num-btn">3</button>
+          <button class="control-btn">Next &gt;</button>
+        </div>
+
+        <div class="page-size">
+          Items per page:
+          <select>
+            <option>10</option>
+            <option>25</option>
+            <option>50</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Generic Action Reason Modal -->
+  <app-modal [isOpen]="isGenericModalOpen" [title]="genericModalTitle" (close)="isGenericModalOpen = false">
+    <div class="reject-ticket-content">
+      <div class="form-field">
+        <label>Reason for {{genericActionType}}</label>
+        <div class="select-wrapper">
+          <select class="form-control" [(ngModel)]="genericReason">
+            <option value="" disabled selected>Select a reason</option>
+            <option value="documentation">Archive required</option>
+            <option value="error">Historical correction</option>
+            <option value="audit">Audit review</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Additional Notes</label>
+        <textarea class="reject-textarea" [(ngModel)]="genericNote" placeholder="Context for history record..."></textarea>
+      </div>
+    </div>
+    <div class="modal-footer-btns">
+      <button class="btn btn-cancel" (click)="isGenericModalOpen = false">Cancel</button>
+      <button class="btn btn-submit" [disabled]="!genericReason" (click)="handleGenericSubmit()">Submit {{genericActionType}}</button>
+    </div>
+  </app-modal>
+</div>

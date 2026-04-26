@@ -1,0 +1,108 @@
+.assign-ticket-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: "Inter", sans-serif;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-field label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.select-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.select-wrapper::after {
+  content: "";
+  position: absolute;
+  right: 16px;
+  width: 10px;
+  height: 6px;
+  background-color: #94a3b8;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  pointer-events: none;
+}
+
+.assign-select {
+  width: 100%;
+  padding: 14px 16px;
+  padding-right: 40px;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  font-size: 14px;
+  color: #1e293b;
+  outline: none;
+  appearance: none;
+  background: white;
+  transition: all 0.2s ease;
+  font-family: "Inter", sans-serif;
+}
+
+.assign-select:focus {
+  border-color: #22bcd4;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+}
+
+.assign-select::placeholder {
+  color: #94a3b8;
+  font-family: "Inter", sans-serif;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 24px;
+}
+
+.btn {
+  padding: 12px 28px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+  font-family: "Inter", sans-serif;
+}
+
+.btn-cancel {
+  background: #f8fafc;
+  color: #475569;
+  font-family: "Inter", sans-serif;
+}
+
+.btn-cancel:hover {
+  background: #f1f5f9;
+}
+
+.btn-primary {
+  background: #89b4ff; /* Light blue as in design */
+  color: white;
+  min-width: 120px;
+  font-family: "Inter", sans-serif;
+}
+
+.btn-primary:hover {
+  background: #76a1ff;
+  transform: translateY(-1px);
+}
+
+.btn-primary[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  font-family: "Inter", sans-serif;
+}

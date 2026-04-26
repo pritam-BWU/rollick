@@ -1,0 +1,71 @@
+<!-- <div class="right-panel">
+  <div class="right-header">
+    <span class="right-title">Product With Account</span>
+    <input type="text" class="search-box" placeholder="🔍 Search activity log...">
+  </div>
+  <div class="product-list">
+    <div class="product-item" *ngFor="let product of products">
+      <div class="product-status-dot" [class]="product.statusClass"></div>
+      <div class="product-info">
+        <span class="product-name">{{ product.name }}</span>
+        <span class="product-id">ID #{{ product.id }}</span>
+        <span class="product-tag" [class]="product.tagClass">{{ product.tag }}</span>
+        <span class="product-date">📅 {{ product.date }}</span>
+      </div>
+    </div>
+  </div>
+  <button class="add-product-btn">+ Add Product</button>
+</div> -->
+
+
+<div class="right-panel">
+
+  <!-- Header -->
+  <div class="right-header">
+    <span class="right-title">{{ config.title }}</span>
+    <input
+      type="text"
+      class="search-box"
+      [placeholder]="config.searchPlaceholder || '🔍 Search...'"
+      [(ngModel)]="searchTerm">
+  </div>
+
+  <!-- Items List -->
+  <div class="product-list">
+    <div class="product-item" *ngFor="let item of filteredItems">
+
+      <!-- Status dot (optional) -->
+      <div
+        *ngIf="item.statusClass"
+        class="product-status-dot"
+        [ngClass]="item.statusClass">
+      </div>
+
+      <!-- Item Info -->
+      <div class="product-info">
+        <span class="product-name">{{ item.name }}</span>
+        <span *ngIf="item.subText" class="product-id">{{ item.subText }}</span>
+        <span *ngIf="item.tag" class="product-tag" [ngClass]="item.tagClass">{{ item.tag }}</span>
+        <span *ngIf="item.date" class="product-date">📅 {{ item.date }}</span>
+
+        <!-- Extra flexible fields -->
+        <div *ngFor="let field of item.extraFields" class="extra-field">
+          <span class="extra-label">{{ field.label }}:</span>
+          <span class="extra-value">{{ field.value }}</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Empty state -->
+    <div *ngIf="filteredItems.length === 0" class="empty-state">
+      No records found.
+    </div>
+  </div>
+
+  <!-- Add Button (optional) -->
+  <button *ngIf="config?.addButtonLabel" class="add-product-btn" (click)="onAddButtonClick()">
+    {{ config.addButtonLabel }}
+  </button>
+
+</div>

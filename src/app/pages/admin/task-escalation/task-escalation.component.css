@@ -1,0 +1,252 @@
+:host {
+  display: block;
+  padding: 24px;
+  background-color: #f8fafc;
+  min-height: 100vh;
+}
+
+.container-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.pagehead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.pagehead h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.createticketbtn {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-download {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-download:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.filter-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  margin-bottom: 24px;
+}
+
+.filternewflex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.search-bar {
+  flex: 1;
+  min-width: 300px;
+  position: relative;
+}
+
+.icon-search {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: #94a3b8;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 12px 16px 12px 48px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #fcfdfe;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.search-bar input:focus {
+  border-color: #3b82f6;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.05);
+}
+
+.filters-grid {
+  display: flex;
+  gap: 12px;
+}
+
+.filter-group-main {
+  display: flex;
+  gap: 12px;
+}
+
+.filter-dropdown {
+  position: relative;
+  min-width: 140px;
+}
+
+.filter-dropdown select {
+  width: 100%;
+  padding: 10px 16px;
+  padding-right: 36px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #ffffff;
+  font-size: 14px;
+  color: #475569;
+  font-weight: 500;
+  appearance: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.filter-dropdown::after {
+  content: "";
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b' stroke-width='2.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.filter-dropdown.has-icon svg {
+  position: absolute;
+  right: 36px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: #94a3b8;
+  pointer-events: none;
+}
+
+.table-card {
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1000px;
+}
+
+.data-table th {
+  padding: 16px 20px;
+  background: #f8fafc;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  color: #64748b;
+  font-size: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.data-table td {
+  padding: 16px 20px;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 14px;
+  color: #334155;
+}
+
+.data-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.fw-bold {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.truncate {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.outline-red {
+  background: #fff1f2;
+  color: #ef4444;
+  border: 1px solid #fecaca;
+}
+
+.outline-yellow {
+  background: #fffbeb;
+  color: #d97706;
+  border: 1px solid #fde68a;
+}
+
+.outline-gray {
+  background: #f8fafc;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+}
+
+.fill-blue {
+  background: #eff6ff;
+  color: #3b82f6;
+}
+
+.view-icon {
+  color: #3b82f6;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.view-icon:hover {
+  opacity: 1;
+}
+
+.view-icon svg {
+  width: 20px;
+  height: 20px;
+}

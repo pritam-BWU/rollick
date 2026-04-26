@@ -1,0 +1,117 @@
+.reject-ticket-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: "Inter", sans-serif;
+  margin-top: 10px;
+  padding: 0 24px 20px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-field label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.form-control,
+.reject-textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 14px;
+  color: #1e293b;
+  outline: none;
+  background: #f8fafc;
+  transition: all 0.2s ease;
+  font-family: "Inter", sans-serif;
+  box-sizing: border-box;
+}
+
+.reject-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-control:focus,
+.reject-textarea:focus {
+  border-color: #ef4444;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.08);
+}
+
+.select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.select-wrapper::after {
+  content: '';
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #94a3b8;
+  pointer-events: none;
+}
+
+select.form-control {
+  appearance: none;
+  padding-right: 40px;
+  width: 100%;
+}
+
+.modal-footer-btns {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 0 24px 24px;
+}
+
+.btn {
+  padding: 12px 28px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+  font-family: "Inter", sans-serif;
+}
+
+.btn-cancel {
+  background: white;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+}
+
+.btn-cancel:hover {
+  background: #f8fafc;
+}
+
+.btn-submit {
+  background: #ef4444;
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.2);
+}
+
+.btn-submit:hover:not(:disabled) {
+  background: #dc2626;
+  box-shadow: 0 8px 15px -3px rgba(239, 68, 68, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: #cbd5e1;
+  box-shadow: none;
+}

@@ -1,0 +1,139 @@
+<app-side-drawer [isOpen]="isOpen" title="Assign Ticket" (close)="onClose()">
+  <div class="ticket-form">
+
+    <!-- Basic Information -->
+    <!-- <div class="form-section">
+      <h3>Basic Information</h3>
+
+      <div class="form-field">
+        <label>Ticket Name <span class="required">*</span></label>
+        <input type="text" [(ngModel)]="ticketData.name" placeholder="Enter ticket name">
+      </div>
+
+      <div class="form-field">
+        <label>Description</label>
+        <textarea [(ngModel)]="ticketData.description" placeholder="Enter ticket description" rows="4"></textarea>
+      </div>
+    </div> -->
+
+    <!-- Assignment Section -->
+    <div class="form-section">
+      <!-- <h3>Assignment</h3> -->
+
+      <div class="form-field">
+        <label>Department <span class="required">*</span></label>
+        <div class="select-wrapper">
+          <select [(ngModel)]="ticketData.department">
+            <option value="" disabled selected>Select department</option>
+            <option value="sms">SMS</option>
+            <option value="rm">RM</option>
+            <option value="gi">GI</option>
+            <option value="ccm">CCM</option>
+            <option value="project">Project</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>Ticket Category</label>
+        <div class="select-wrapper">
+          <select [(ngModel)]="ticketData.category">
+            <option value="" disabled selected>Select category</option>
+            <option value="quality">Quality Control</option>
+            <option value="maintenance">Maintenance</option>
+            <option value="safety">Safety Inspection</option>
+            <option value="documentation">Documentation</option>
+            <option value="training">Training</option>
+            <option value="production">Production</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Assign Type</label>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="adminAssignType" value="individual" [(ngModel)]="ticketData.assignType">
+            <span>Individual</span>
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="adminAssignType" value="group" [(ngModel)]="ticketData.assignType">
+            <span>Group / Team</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>Assign To <span class="required">*</span></label>
+        <div class="input-with-icon">
+          <svg class="icon-input" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <input type="text" [(ngModel)]="ticketData.assignedTo" placeholder="Search employee or team...">
+        </div>
+      </div>
+    </div>
+
+    <!-- Schedule Section -->
+    <div class="form-section">
+      <h3>Schedule</h3>
+
+      <div class="form-row">
+        <div class="form-field half">
+          <label>Start Date</label>
+          <input type="date" [(ngModel)]="ticketData.startDate">
+        </div>
+        <div class="form-field half">
+          <label>End Date <span class="required">*</span></label>
+          <input type="date" [(ngModel)]="ticketData.endDate">
+        </div>
+      </div>
+    </div>
+
+    <!-- Status and Priority -->
+    <div class="form-section">
+      <h3>Status & Priority</h3>
+
+      <div class="form-field">
+        <label>Initial Status</label>
+        <div class="select-wrapper">
+          <select [(ngModel)]="ticketData.status">
+            <option value="draft">Draft</option>
+            <option value="assigned">Assigned</option>
+            <option value="in-progress">In Progress</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>Priority</label>
+        <div class="priority-group">
+          <button class="priority-btn low" (click)="ticketData.priority = 'low'"
+            [class.active]="ticketData.priority === 'low'">Low</button>
+          <button class="priority-btn mid" (click)="ticketData.priority = 'mid'"
+            [class.active]="ticketData.priority === 'mid'">Mid</button>
+          <button class="priority-btn high" (click)="ticketData.priority = 'high'"
+            [class.active]="ticketData.priority === 'high'">High</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin Notes -->
+    <div class="form-section">
+      <h3>Admin Notes</h3>
+      <div class="form-field">
+        <label>Internal Notes</label>
+        <textarea [(ngModel)]="ticketData.notes"
+          placeholder="Add internal notes for this ticket (not visible to worker)..." rows="3"></textarea>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer Actions -->
+  <div footer class="form-footer">
+    <button class="btn-outline" (click)="saveAsDraft()">Save as Draft</button>
+    <button class="btn-primary" (click)="createTicket()">Create & Assign</button>
+  </div>
+
+</app-side-drawer>

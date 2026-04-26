@@ -1,0 +1,220 @@
+.ticket-form {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-section h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: "Inter", sans-serif;
+  appearance: none;
+  width: 100%;
+}
+
+.form-field label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #475569;
+}
+
+.form-field label .required {
+  color: #ef4444;
+  font-family: "Inter", sans-serif;
+}
+
+.form-field input[type="text"],
+.form-field textarea,
+.form-field select,
+.form-field input[type="date"],
+.input-with-icon input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #eef2f6;
+  border-radius: 12px;
+  font-size: 14px;
+  color: #0f172a;
+  outline: none;
+  background: #ffffff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+  appearance: none;
+}
+
+.form-field input:focus,
+.form-field textarea:focus,
+.form-field select:focus {
+  border-color: #1A6BF4;
+  box-shadow: 0 0 0 3px rgba(26, 107, 244, 0.05);
+  font-family: "Inter", sans-serif;
+}
+
+.form-field textarea {
+  resize: vertical;
+  font-family: "Inter", sans-serif;
+}
+
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper::after {
+  content: '';
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #94a3b8;
+  pointer-events: none;
+}
+
+.input-with-icon {
+  position: relative;
+}
+
+.input-with-icon .icon-input {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: #94a3b8;
+  pointer-events: none;
+}
+
+.input-with-icon input {
+  padding-right: 48px;
+}
+
+.form-row {
+  display: flex;
+  gap: 16px;
+}
+
+.radio-group {
+  display: flex;
+  gap: 24px;
+  margin-top: 4px;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e293b;
+  font-family: "Inter", sans-serif;
+}
+
+.radio-label input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  cursor: pointer;
+  accent-color: #1A6BF4;
+  font-family: "Inter", sans-serif;
+}
+
+.priority-group {
+  display: flex;
+  gap: 12px;
+}
+
+.priority-btn {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #f1f5f9;
+  font-size: 14px;
+  font-weight: 600;
+  color: #64748B;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  font-family: "Inter", sans-serif;
+}
+
+.priority-btn:hover {
+  background: #f8fafc;
+}
+
+.priority-btn.active {
+  background: #ffffff;
+}
+
+/* Mid Priority Active Style (Orange as per design) */
+.priority-btn.active:nth-child(2) {
+  border-color: #F97316;
+  color: #F97316;
+  background: #FFF7ED;
+  font-family: "Inter", sans-serif;
+}
+
+/* Low and High could have their own active colors if needed, but keeping it generic or similar for now */
+.priority-btn.active:not(:nth-child(2)) {
+  border-color: #eef2f6;
+  color: #0f172a;
+  font-family: "Inter", sans-serif;
+}
+
+.form-footer {
+  display: flex;
+  padding: 24px 32px;
+  gap: 16px;
+  font-family: "Inter", sans-serif;
+}
+
+.form-footer button {
+  flex: 1;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  font-family: "Inter", sans-serif;
+}
+
+.btn-outline {
+  background: transparent;
+  color: #2e2e2e;
+  border: 1.5px solid #22bcd4;
+}
+
+.btn-outline:hover {
+  background: rgba(26, 107, 244, 0.05);
+}
+
+.btn-primary {
+  background: #22bcd4;
+  color: #ffffff;
+  border: none;
+  font-family: "Inter", sans-serif;
+}
+
+.btn-primary:hover {
+  background: #2bc3db;
+}

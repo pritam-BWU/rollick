@@ -1,0 +1,118 @@
+.right-panel {
+  width: 220px;
+  background: #fff;
+  border-left: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.right-header {
+  padding: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.right-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1a2e;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.search-box {
+  width: 100%;
+  padding: 7px 10px;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  font-size: 12px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.product-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.product-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.product-status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+.product-status-dot.green  { background: #4CAF50; }
+.product-status-dot.orange { background: #FF9800; }
+.product-status-dot.red    { background: #F44336; }
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.product-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.product-id {
+  font-size: 11px;
+  color: #999;
+}
+
+.product-tag {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.product-tag.warranty   { color: #1a4fa0; }
+.product-tag.service    { color: #FF9800; }
+.product-tag.expired    { color: #F44336; }
+
+.product-date {
+  font-size: 11px;
+  color: #aaa;
+}
+
+.add-product-btn {
+  margin: 12px;
+  padding: 10px;
+  background: #1a4fa0;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+
+/*============================== Extra fields =======================================*/
+
+.empty-state {
+  text-align: center;
+  color: #aaa;
+  font-size: 13px;
+  padding: 20px 0;
+}
+.extra-field {
+  display: flex;
+  gap: 4px;
+  font-size: 11px;
+}
+.extra-label { color: #999; }
+.extra-value { color: #333; font-weight: 500; }

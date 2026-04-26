@@ -1,0 +1,219 @@
+<!-- <div class="quick-link-container">
+	<div class="start-heading">
+		<h1 class="heading">Welcome, Admin. Today's operational overview.</h1>
+		<img src="assets/images/ChevronDown.png" click()="toggle()">
+	</div>
+	<h3 class="sub-heading">All systems running smoothly. 8 new updates require your attention.</h3>
+
+	<div class="alert">
+		<img src="assets/images/AlertCircle.png">
+		<span>3 maintenance tickets scheduled for today</span>
+	</div>
+
+	<div class="quick-links">
+		<div class="set-align">
+			<img src="assets/images/add-icon.png">
+			<span>Add</span>
+		</div>
+
+		<div class="set-align">
+			<img src="assets/images/add-product.png">
+			<span>Add Product</span>
+		</div>
+
+		<div class="set-align">
+			<img src="assets/images/add-account.png">
+			<span>Add Account</span>
+		</div>
+
+		<div class="set-align">
+			<img src="assets/images/add-contact.png">
+			<span>Add Contact</span>
+		</div>
+
+		<div class="set-align">
+			<img src="assets/images/add-quotation.png">
+			<span>Quotation</span>
+		</div>
+
+		<div class="set-align">
+			<img src="assets/images/create-ticket.png">
+			<span>Create Ticket</span>
+		</div>
+
+	</div>
+</div> -->
+
+
+
+<!-- ==================================================================================== -->
+
+<div class="page-title-row" *ngIf="pageTitle">
+  <!-- <h2 class="page-heading">{{ pageTitle }}</h2> -->
+  <h3 *ngIf="pageSubtitle">{{ pageSubtitle }}</h3>
+  <!-- <div class="page-title-actions">
+    <ng-content></ng-content>
+  </div> -->
+</div>
+
+<div class="quick-link-container">
+
+  <div class="start-heading">
+    <h1 class="heading" *ngIf="isExpanded">Welcome, Admin. Today's operational overview.</h1>
+
+    <div class="alert" *ngIf="!isExpanded">
+      <img src="assets/images/AlertCircle.png" style="height: 20px; width: 20px;">
+      <span>3 maintenance tickets scheduled for today</span>
+    </div>
+
+    <img src="assets/images/ChevronDown.png" (click)="toggle()" style="cursor:pointer" class="toggle-arrow">
+
+  </div>
+
+  <!-- This part will show only when expanded -->
+  <div *ngIf="isExpanded">
+
+    <h3 class="sub-heading">
+      All systems running smoothly. 8 new updates require your attention.
+    </h3>
+
+  </div>
+
+
+
+  <div *ngIf="isExpanded">
+
+    <!-- Alert always visible -->
+    <div class="alert">
+      <img src="assets/images/AlertCircle.png">
+      <span>3 maintenance tickets scheduled for today</span>
+    </div>
+
+    <div class="quick-links">
+      <div class="set-align">
+        <img src="assets/images/add-icon.png">
+        <span>Add</span>
+      </div>
+
+      <div class="set-align">
+        <img src="assets/images/add-product.png">
+        <span>Add Product</span>
+      </div>
+
+      <div class="set-align" (click)="createAccount()">
+        <img src="assets/images/add-account.png">
+        <span>Add Account</span>
+      </div>
+
+      <div class="set-align" (click)="createContact()">
+        <img src="assets/images/add-contact.png">
+        <span>Add Contact</span>
+      </div>
+
+      <div class="set-align">
+        <img src="assets/images/add-quotation.png">
+        <span>Quotation</span>
+      </div>
+
+      <div class="set-align">
+        <img src="assets/images/create-ticket.png">
+        <span>Create Ticket</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- <div class="overlay" *ngIf="showAccountPopup" (click)="closePopup()"></div> -->
+
+
+  <!-- <div class="account-drawer" [class.open]="showAccountPopup">
+  <div class="drawer-header">
+    <h2>Create Account</h2>
+    <span class="close-btn" (click)="closePopup()">✕</span>
+  </div>
+  <div class="drawer-body">
+
+    <div class="section-header" (click)="toggleSection('basic')">
+      <h3>Basic Information</h3>
+      <span class="chevron" [class.open]="openSection === 'basic'">
+      	<img src="assets/images/form-collapse.png">
+      </span>
+    </div>
+    <div class="section-content" [class.expanded]="openSection === 'basic'">
+      <label>Account Name *</label>
+      <input type="text" placeholder="Enter account name">
+      <label>Account Type *</label>
+      <select>
+        <option>Select Type</option>
+      </select>
+      <label>Industry</label>
+      <select>
+        <option>Select Industry</option>
+      </select>
+    </div>
+
+
+    <div class="section-header" (click)="toggleSection('other')">
+      <h3>Other Information</h3>
+      <span class="chevron" [class.open]="openSection === 'other'">
+      	<img src="assets/images/form-collapse.png">
+      </span>
+    </div>
+    <div class="section-content" [class.expanded]="openSection === 'other'">
+      <label>GSTIN No *</label>
+      <input type="text" placeholder="Enter GSTIN">
+      <label>PAN No *</label>
+      <input type="text" placeholder="Enter PAN">
+      <label>Website</label>
+      <input type="text" placeholder="Enter website">
+      <div class="status-toggle">
+        <label>Status</label>
+        <div>
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </label>
+          <span class="status-text">Active</span>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="section-header" (click)="toggleSection('payment')">
+      <h3>Payment Information</h3>
+      <span class="chevron" [class.open]="openSection === 'payment'">
+      	<img src="assets/images/form-collapse.png">
+      </span>
+    </div>
+    <div class="section-content" [class.expanded]="openSection === 'payment'">
+      <label>Credit Limit *</label>
+      <input type="text" placeholder="Enter Limit">
+      <label>Payment Terms *</label>
+      <input type="text" placeholder="Enter terms">
+    </div>
+
+  </div>
+  <div class="footer-btn">
+		<button class="clear-all">Clear All</button>
+		<button class="save">Save</button>
+	</div>
+</div> -->
+
+
+  <!-- <app-create-account-drawer
+  [show]="showDrawer"
+  [config]="accountDrawerConfig"
+  (closed)="showDrawer = false"
+  (saved)="onSaved($event)">
+</app-create-account-drawer> -->
+
+  <app-create-account-drawer [show]="showAccountPopup" [config]="accountDrawerConfig"
+    (closed)="showAccountPopup = false" (saved)="onSaved($event)">
+  </app-create-account-drawer>
+
+  <app-create-account-drawer [show]="showContactPopup" [config]="contactDrawerConfig"
+    (closed)="showContactPopup = false" (saved)="onSaved($event)">
+  </app-create-account-drawer>
+
+
+</div>

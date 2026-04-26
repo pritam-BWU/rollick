@@ -1,0 +1,195 @@
+/*.kpi-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: space-evenly;
+}
+
+.kpi-container {
+  display: flex;
+  gap: 18px;
+  overflow: hidden;
+}
+
+.kpi-card {
+  width: 220px;
+  height: 120px;
+  background: white;
+  border-radius: 10px;
+  padding: 16px;
+  border-top: 4px solid;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+
+.kpi-card:hover {
+  transform: translateY(-3px);
+}
+
+.kpi-header {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.kpi-value {
+  font-size: 30px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.kpi-trend {
+  margin-top: 6px;
+  font-size: 13px;
+}
+
+.trend-up {
+  color: #4CAF50;
+  font-weight: 600;
+}
+
+.trend-down {
+  color: #F44336;
+  font-weight: 600;
+}
+
+.nav-btn {
+  border: none;
+  background: #2c3e50;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.nav-btn:hover {
+  background: #1a252f;
+}
+
+.kpi-card{
+  border-left:4px solid var(--primary-color);
+}*/
+
+
+/*======================================================================================*/
+
+.kpi-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+/*  padding: 12px 0;*/
+  margin: 0 20px 0 20px;
+}
+
+.kpi-container {
+  display: flex;
+  gap: 14px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.kpi-card {
+  flex: 1;
+  min-width: 0;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px 18px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.07);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.kpi-card.kpi-active{
+  border: 2px solid #1a4fa0;
+  box-shadow: 0 0 0 3px rgba(26, 79, 160, 0.15);
+}
+
+.kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Top row: icon + badge */
+.kpi-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.kpi-icon {
+  font-size: 20px;
+}
+
+/* Trend badge */
+.kpi-badge {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+.badge-up {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.badge-down {
+  background-color: #fdecea;
+  color: #c62828;
+}
+
+/* Value */
+.kpi-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0F172A;
+  line-height: 1.1;
+  margin-top: 4px;
+}
+
+/* Label */
+.kpi-label {
+  /*font-size: 13px;
+  color: #777;
+  font-weight: 400;*/
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  color: #475569;
+
+}
+
+/* Nav buttons */
+.nav-btn {
+  border: none;
+  background: #f0f0f0;
+  color: #333;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s;
+  padding: 0;
+  line-height: 1;
+}
+
+.nav-btn:hover:not(:disabled) {
+  background: #ddd;
+}
+
+.nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}

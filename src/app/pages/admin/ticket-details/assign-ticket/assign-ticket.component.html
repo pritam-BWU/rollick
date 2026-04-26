@@ -1,0 +1,18 @@
+<app-modal [isOpen]="isOpen" title="Reassign Ticket" (close)="onClose()">
+  <div class="assign-ticket-content">
+    <div class="form-field">
+      <label>Select New Assignee</label>
+      <div class="select-wrapper">
+        <select [(ngModel)]="selectedEmployee" class="assign-select">
+          <option value="" disabled selected>Choose an employee...</option>
+          <option *ngFor="let emp of employees" [value]="emp">{{ emp }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div footer>
+    <button class="btn btn-cancel" (click)="onClose()">Cancel</button>
+    <button class="btn btn-primary" [disabled]="!selectedEmployee" (click)="onAssign()">Reassign</button>
+  </div>
+</app-modal>

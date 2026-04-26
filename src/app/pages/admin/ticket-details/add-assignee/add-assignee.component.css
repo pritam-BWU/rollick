@@ -1,0 +1,105 @@
+.add-assignee-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-family: 'Inter', sans-serif;
+}
+
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 14px;
+  width: 18px;
+  height: 18px;
+  color: #94a3b8;
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 12px 12px 42px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.search-input:focus {
+  border-color: #3b82f6;
+}
+
+.search-input::placeholder {
+  color: #94a3b8;
+}
+
+.employee-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 240px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.employee-item {
+  padding: 14px 16px;
+  border: 1px solid #f1f5f9;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.employee-item:hover {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+  transform: translateX(4px);
+}
+
+.employee-item .name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 24px;
+}
+
+.btn {
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+}
+
+.btn-cancel {
+  background: #f8fafc;
+  color: #475569;
+}
+
+.btn-cancel:hover {
+  background: #f1f5f9;
+}
+
+.btn-primary {
+  background: #89b4ff; /* Light blue as in design */
+  color: white;
+  min-width: 140px;
+}
+
+.btn-primary:hover {
+  background: #76a1ff;
+  transform: translateY(-1px);
+}

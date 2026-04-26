@@ -1,0 +1,563 @@
+<div class="container-wrapper">
+  <div class="pagehead usertkthead">
+    <h2>Ticket List</h2>
+    <div class="createticketbtn">
+      <button class="btn-download">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        Download Ticket List
+      </button>
+    </div>
+  </div>
+  <!-- KPI Stats Section -->
+  <div class="kpi-container">
+    <div class="kpi-card" *ngFor="let kpi of kpiData">
+      <div class="kpi-icon" [ngClass]="kpi.icon">
+        <!-- Total -->
+        <svg *ngIf="kpi.icon === 'total'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+        </svg>
+        <!-- Open -->
+        <svg *ngIf="kpi.icon === 'open'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <!-- Progress -->
+        <svg *ngIf="kpi.icon === 'progress'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path
+            d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83">
+          </path>
+        </svg>
+        <!-- Closed -->
+        <svg *ngIf="kpi.icon === 'closed'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+      </div>
+      <div class="kpi-info">
+        <span class="label">{{kpi.label}}</span>
+        <h3 class="value">{{kpi.value}}</h3>
+        <span class="trend" [ngClass]="kpi.trendClass">{{kpi.trend}}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- INJECTED TICKET LIST -->
+  <div class="filter-card filternewflex">
+    <div class="search-bar">
+      <svg class="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="text" placeholder="Search tickets by name, description, or Id...">
+    </div>
+
+    <div class="filters-grid">
+      <div class="filter-group-main">
+        <div class="filter-dropdown">
+          <select>
+            <option>All Status</option>
+            <option>Open</option>
+            <option>Reopen</option>
+            <option>Accepted</option>
+            <option>Resolved</option>
+            <option>Rejected</option>
+            <option>Auto Close</option>
+            <option>Close</option>
+          </select>
+        </div>
+
+        <div class="filter-group-secondary">
+          <div class="filter-dropdown has-icon">
+            <select>
+              <option>By Department</option>
+              <option>IT</option>
+              <option>HR</option>
+              <option>Finance</option>
+              <option>Maintenance</option>
+              <option>Operations</option>
+              <option>Production</option>
+            </select>
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+
+          <div class="filter-dropdown">
+            <select>
+              <option>By Category</option>
+              <option>Salary</option>
+              <option>Leave</option>
+              <option>Overtime</option>
+              <option>Attendance</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="filter-dropdown-container">
+            <button class="filter-icon-btn" (click)="toggleFilterDropdown()" [class.active]="isFilterDropdownOpen">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </svg>
+            </button>
+
+            <!-- Filter Dropdown Menu -->
+            <div class="filter-menu-card" *ngIf="isFilterDropdownOpen">
+              <div class="filter-options">
+                <label class="filter-item">
+                  <div class="checkbox-wrapper">
+                    <input type="checkbox" [(ngModel)]="selectedFilters.date">
+                  </div>
+                  <span>By Date</span>
+                </label>
+                <label class="filter-item">
+                  <div class="checkbox-wrapper">
+                    <input type="checkbox" [(ngModel)]="selectedFilters.id">
+                  </div>
+                  <span>By Id</span>
+                </label>
+              </div>
+              <div class="filter-actions">
+                <button class="btn-filter-search" (click)="applyFilters()">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  </svg>
+                  Search
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="create-btn-wrapper">
+            <button class="create-btn" (click)="openCreateTicketDrawer()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              Create New Ticket
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-card newtblcard">
+    <div class="table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Ticket Id</th>
+            <th>Created At</th>
+            <th>Duration</th>
+            <th>Description</th>
+            <th>Department</th>
+            <th>Category</th>
+            <th>Type</th>
+            <th>Assigned To</th>
+            <th>Status</th>
+            <th>View</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>TKT-2024-001</td>
+            <td>10/05/2024 <span>10:56 AM</span></td>
+            <td>2 Days</td>
+            <td class="truncate" title="Complete monthly safety inspection">Complete monthly safety insp...</td>
+            <td>Safety Inspection</td>
+            <td>Other</td>
+            <td>Issue</td>
+            <td>Arjun Sharma</td>
+            <td><span class="pill outline-green">Close</span></td>
+            <td><a [routerLink]="['/user/ticket', 'TKT-2024-001']" [queryParams]="{ from: 'my' }" class="view-icon"><svg
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg></a></td>
+            <td><a href="javascript:void(0)" class="action-icon"><svg viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="1"></circle>
+                  <circle cx="12" cy="5" r="1"></circle>
+                  <circle cx="12" cy="19" r="1"></circle>
+                </svg></a></td>
+          </tr>
+          <tr>
+            <td>TKT-2024-002</td>
+            <td>12/05/2024 <span>10:56 AM</span></td>
+            <td>5 Hours</td>
+            <td class="truncate" title="Review and approve maintenance">Review and approve mainten...</td>
+            <td>Maintenance</td>
+            <td>Overtime</td>
+            <td>Issue</td>
+            <td>
+              <div class="info-icon-wrapper">
+                <span>Anjali Rao</span>
+                <svg class="info-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="12" cy="12" r="11" />
+                  <rect x="11" y="10" width="2" height="7" fill="white" />
+                  <circle cx="12" cy="7" r="1.5" fill="white" />
+                </svg>
+                <div class="activity-log-popover">
+                  <div class="log-title">Activity Log</div>
+                  <div class="log-item">
+                    <div class="log-user">Anjali Rao</div>
+                    <div class="log-action">Assigned to Anjali Rao</div>
+                    <div class="log-time">31/05/2024 04:30 PM</div>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td><span class="pill outline-indigo">Reopen</span></td>
+            <td><a [routerLink]="['/user/ticket', 'TKT-2024-002']" [queryParams]="{ from: 'my' }" class="view-icon"><svg
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg></a></td>
+            <td><a href="javascript:void(0)" class="action-icon"><svg viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="1"></circle>
+                  <circle cx="12" cy="5" r="1"></circle>
+                  <circle cx="12" cy="19" r="1"></circle>
+                </svg></a></td>
+          </tr>
+          <tr>
+            <td>TKT-2024-003</td>
+            <td>15/05/2024 <span>10:56 AM</span></td>
+            <td>1 Day</td>
+            <td class="truncate" title="Update equipment records">Update equipment database ...</td>
+            <td>IT</td>
+            <td>Salary</td>
+            <td>Query</td>
+            <td>
+              <div class="info-icon-wrapper">
+                <span>Kavya Reddy</span>
+                <svg class="info-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="12" cy="12" r="11" />
+                  <rect x="11" y="10" width="2" height="7" fill="white" />
+                  <circle cx="12" cy="7" r="1.5" fill="white" />
+                </svg>
+                <div class="activity-log-popover">
+                  <div class="log-title">Activity Log</div>
+                  <div class="log-item">
+                    <div class="log-user">Rajesh Kumar</div>
+                    <div class="log-action">Assigned to Kavya Reddy</div>
+                    <div class="log-time">22/05/2024 10:30 AM</div>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td><span class="pill outline-red">Rejected</span></td>
+            <td><a [routerLink]="['/user/ticket', 'TKT-2024-003']" [queryParams]="{ from: 'my' }" class="view-icon"><svg
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg></a></td>
+            <td><a href="javascript:void(0)" class="action-icon"><svg viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="1"></circle>
+                  <circle cx="12" cy="5" r="1"></circle>
+                  <circle cx="12" cy="19" r="1"></circle>
+                </svg></a></td>
+          </tr>
+          <tr>
+            <td>TKT-2024-004</td>
+            <td>18/05/2024 <span>10:56 AM</span></td>
+            <td>3 Days</td>
+            <td class="truncate" title="Complete documentation for">Complete documentation for ...</td>
+            <td>HR</td>
+            <td>Leave</td>
+            <td>Issue</td>
+
+            <td>
+              <div class="info-icon-wrapper">
+                <span>Vikram Singh</span>
+                <svg class="info-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="12" cy="12" r="11" />
+                  <rect x="11" y="10" width="2" height="7" fill="white" />
+                  <circle cx="12" cy="7" r="1.5" fill="white" />
+                </svg>
+                <div class="activity-log-popover">
+                  <div class="log-title">Activity Log</div>
+                  <div class="log-item">
+                    <div class="log-user">System Admin</div>
+                    <div class="log-action">Assigned to Vikram Singh</div>
+                    <div class="log-time">21/05/2024 11:30 AM</div>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td><span class="pill outline-teal">Resolved</span></td>
+            <td><a [routerLink]="['/user/ticket', 'TKT-2024-004']" [queryParams]="{ from: 'my' }" class="view-icon"><svg
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg></a></td>
+            <td><a href="javascript:void(0)" class="action-icon"><svg viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="1"></circle>
+                  <circle cx="12" cy="5" r="1"></circle>
+                  <circle cx="12" cy="19" r="1"></circle>
+                </svg></a></td>
+          </tr>
+          <tr>
+            <td>TKT-2024-005</td>
+            <td>20/05/2024 <span>10:56 AM</span></td>
+            <td>4 Hours</td>
+            <td class="truncate" title="Analyze and implement efficiency">Analyze and implement effici...</td>
+            <td>Production</td>
+            <td>Attendance</td>
+            <td>Issue</td>
+
+            <td>
+              <div class="info-icon-wrapper">
+                <span>Rajesh Kumar</span>
+                <svg class="info-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="12" cy="12" r="11" />
+                  <rect x="11" y="10" width="2" height="7" fill="white" />
+                  <circle cx="12" cy="7" r="1.5" fill="white" />
+                </svg>
+                <div class="activity-log-popover">
+                  <div class="log-title">Activity Log</div>
+                  <div class="log-item">
+                    <div class="log-user">Vikram Singh</div>
+                    <div class="log-action">Assigned to Rajesh Kumar</div>
+                    <div class="log-time">30/05/2024 09:45 AM</div>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td><span class="pill outline-cyan">Accepted</span></td>
+            <td><a [routerLink]="['/user/ticket', 'TKT-2024-005']" [queryParams]="{ from: 'my' }" class="view-icon"><svg
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg></a></td>
+            <td><a href="javascript:void(0)" class="action-icon"><svg viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="1"></circle>
+                  <circle cx="12" cy="5" r="1"></circle>
+                  <circle cx="12" cy="19" r="1"></circle>
+                </svg></a></td>
+          </tr>
+          <tr>
+            <td>TKT-2024-006</td>
+            <td>21/05/2024 <span>09:00 AM</span></td>
+            <td>2 Hours</td>
+            <td class="truncate" title="Software license renewal">Software license renewal...</td>
+            <td>IT</td>
+            <td>Salary</td>
+            <td>Query</td>
+            <td>
+              <div class="info-icon-wrapper">
+                <span>Kavya Reddy</span>
+                <svg class="info-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="12" cy="12" r="11" />
+                  <rect x="11" y="10" width="2" height="7" fill="white" />
+                  <circle cx="12" cy="7" r="1.5" fill="white" />
+                </svg>
+                <div class="activity-log-popover">
+                  <div class="log-title">Activity Log</div>
+                  <div class="log-item">
+                    <div class="log-user">Rajesh Kumar</div>
+                    <div class="log-action">Assigned to Kavya Reddy</div>
+                    <div class="log-time">22/05/2024 10:30 AM</div>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td><span class="pill outline-blue">Open</span></td>
+            <td><a [routerLink]="['/user/ticket', 'TKT-2024-006']" [queryParams]="{ from: 'my' }" class="view-icon"><svg
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg></a></td>
+            <td><a href="javascript:void(0)" class="action-icon"><svg viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="1"></circle>
+                  <circle cx="12" cy="5" r="1"></circle>
+                  <circle cx="12" cy="19" r="1"></circle>
+                </svg></a></td>
+          </tr>
+          <tr>
+            <td>TKT-2024-007</td>
+            <td>21/05/2024 <span>11:30 AM</span></td>
+            <td>6 Hours</td>
+            <td class="truncate" title="Office chair replacement">Office chair replacement...</td>
+            <td>HR</td>
+            <td>Other</td>
+            <td>Issue</td>
+            <td>
+              <div class="info-icon-wrapper">
+                <span>Anjali Rao</span>
+                <svg class="info-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="12" cy="12" r="11" />
+                  <rect x="11" y="10" width="2" height="7" fill="white" />
+                  <circle cx="12" cy="7" r="1.5" fill="white" />
+                </svg>
+                <div class="activity-log-popover">
+                  <div class="log-title">Activity Log</div>
+                  <div class="log-item">
+                    <div class="log-user">System Admin</div>
+                    <div class="log-action">Assigned to Vikram Singh</div>
+                    <div class="log-time">21/05/2024 11:30 AM</div>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td><span class="pill outline-indigo">Reopen</span></td>
+            <td><a [routerLink]="['/user/ticket', 'TKT-2024-007']" [queryParams]="{ from: 'my' }" class="view-icon"><svg
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg></a></td>
+            <td><a href="javascript:void(0)" class="action-icon"><svg viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="1"></circle>
+                  <circle cx="12" cy="5" r="1"></circle>
+                  <circle cx="12" cy="19" r="1"></circle>
+                </svg></a></td>
+          </tr>
+          <tr>
+            <td>TKT-2024-008</td>
+            <td>22/05/2024 <span>10:15 AM</span></td>
+            <td>1 Day</td>
+            <td class="truncate" title="Internet connectivity issues">Internet connectivity issues...</td>
+            <td>IT</td>
+            <td>Other</td>
+            <td>Issue</td>
+            <td>
+              <div class="info-icon-wrapper">
+                <span>Anjali Rao</span>
+                <svg class="info-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="12" cy="12" r="11" />
+                  <rect x="11" y="10" width="2" height="7" fill="white" />
+                  <circle cx="12" cy="7" r="1.5" fill="white" />
+                </svg>
+                <div class="activity-log-popover">
+                  <div class="log-title">Activity Log</div>
+                  <div class="log-item">
+                    <div class="log-user">Anjali Rao</div>
+                    <div class="log-action">Assigned to Anjali Rao</div>
+                    <div class="log-time">31/05/2024 04:30 PM</div>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td><span class="pill outline-orange">Auto Close</span></td>
+            <td><a [routerLink]="['/user/ticket', 'TKT-2024-008']" [queryParams]="{ from: 'my' }" class="view-icon"><svg
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg></a></td>
+            <td><a href="javascript:void(0)" class="action-icon"><svg viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="1"></circle>
+                  <circle cx="12" cy="5" r="1"></circle>
+                  <circle cx="12" cy="19" r="1"></circle>
+                </svg></a></td>
+          </tr>
+          <tr>
+            <td>TKT-2024-012</td>
+            <td>25/05/2024 <span>02:00 PM</span></td>
+            <td>2 Days</td>
+            <td class="truncate" title="Safety training feedback">Safety training feedback...</td>
+            <td>Safety Inspection</td>
+            <td>Document</td>
+            <td>Query</td>
+            <td>Admin</td>
+            <td><span class="pill outline-teal">Resolved</span></td>
+            <td><a [routerLink]="['/user/ticket', 'TKT-2024-012']" [queryParams]="{ from: 'my' }" class="view-icon"><svg
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg></a></td>
+            <td><a href="javascript:void(0)" class="action-icon"><svg viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="1"></circle>
+                  <circle cx="12" cy="5" r="1"></circle>
+                  <circle cx="12" cy="19" r="1"></circle>
+                </svg></a></td>
+          </tr>
+          <tr>
+            <td>TKT-2024-013</td>
+            <td>26/05/2024 <span>11:45 AM</span></td>
+            <td>3 Hours</td>
+            <td class="truncate" title="Leave application error">Leave application error...</td>
+            <td>HR</td>
+            <td>Leave</td>
+            <td>Issue</td>
+            <td>
+              <div class="info-icon-wrapper">
+                <span>Vikram Singh</span>
+                <svg class="info-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="12" cy="12" r="11" />
+                  <rect x="11" y="10" width="2" height="7" fill="white" />
+                  <circle cx="12" cy="7" r="1.5" fill="white" />
+                </svg>
+                <div class="activity-log-popover">
+                  <div class="log-title">Activity Log</div>
+                  <div class="log-item">
+                    <div class="log-user">System Admin</div>
+                    <div class="log-action">Assigned to Vikram Singh</div>
+                    <div class="log-time">21/05/2024 11:30 AM</div>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td><span class="pill outline-red">Rejected</span></td>
+            <td><a [routerLink]="['/user/ticket', 'TKT-2024-013']" [queryParams]="{ from: 'my' }" class="view-icon"><svg
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg></a></td>
+            <td><a href="javascript:void(0)" class="action-icon"><svg viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="1"></circle>
+                  <circle cx="12" cy="5" r="1"></circle>
+                  <circle cx="12" cy="19" r="1"></circle>
+                </svg></a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+      <div class="page-info">Showing <strong>1-5</strong> of <strong>5</strong> tickets</div>
+
+      <div class="page-controls">
+        <button class="control-btn disabled">&lt; Previous</button>
+        <button class="num-btn active">1</button>
+        <button class="num-btn">2</button>
+        <button class="num-btn">3</button>
+        <button class="control-btn">Next &gt;</button>
+      </div>
+
+      <div class="page-size">
+        Items per page:
+        <select>
+          <option>10</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <app-user-create-ticket-drawer [isOpen]="isCreateDrawerOpen"
+    (close)="closeCreateTicketDrawer()"></app-user-create-ticket-drawer>
+</div>
